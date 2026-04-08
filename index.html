@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Πρόταση Πτυχιακής — DevSecOps Pipeline</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Arial, sans-serif; font-size: 14px; color: #222; background: #f5f7fa; }
+  .page { max-width: 900px; margin: 30px auto; background: #fff; padding: 60px 70px; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+
+  /* Cover */
+  .cover { text-align: center; padding: 60px 0 80px; border-bottom: 3px solid #1E406E; margin-bottom: 50px; }
+  .cover .uni { color: #666; font-size: 13px; margin-bottom: 6px; }
+  .cover .label { color: #1E406E; font-size: 15px; margin: 30px 0 12px; font-weight: 600; }
+  .cover h1 { color: #1E406E; font-size: 28px; line-height: 1.4; margin-bottom: 40px; }
+  .cover .meta { color: #444; font-size: 13px; line-height: 2; }
+
+  /* Headings */
+  h2 { color: #1E406E; font-size: 20px; margin: 40px 0 8px; padding-bottom: 6px; border-bottom: 2px solid #1E406E; }
+  h3 { color: #2E609E; font-size: 16px; margin: 28px 0 8px; }
+
+  /* Text */
+  p { line-height: 1.8; margin-bottom: 12px; color: #333; }
+  .quote { font-style: italic; color: #1E406E; background: #EEF3FB; padding: 14px 18px; border-left: 4px solid #1E406E; border-radius: 4px; margin: 14px 0; }
+
+  /* Alert box */
+  .alert { background: #FFF3CD; border-left: 4px solid #FFC107; padding: 14px 18px; border-radius: 4px; margin: 16px 0; }
+  .alert strong { color: #854D00; }
+
+  /* Bullets */
+  ul { margin: 10px 0 14px 24px; }
+  ul li { margin-bottom: 8px; line-height: 1.7; }
+  ol { margin: 10px 0 14px 24px; }
+  ol li { margin-bottom: 8px; line-height: 1.7; }
+
+  /* Code block */
+  pre { background: #F2F2F2; border: 1px solid #ddd; border-radius: 6px; padding: 16px 20px; font-family: 'Courier New', monospace; font-size: 12px; color: #1E406E; overflow-x: auto; margin: 14px 0; line-height: 1.6; white-space: pre; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 13px; }
+  th { background: #1E406E; color: #fff; padding: 10px 14px; text-align: left; }
+  td { padding: 9px 14px; border-bottom: 1px solid #e0e0e0; vertical-align: top; }
+  tr:nth-child(even) td { background: #EEF3FB; }
+  tr:hover td { background: #dce8f7; }
+
+  /* Phase table accent */
+  .phase-table th { background: #2E609E; }
+
+  /* Concept table */
+  .concept td:first-child { font-weight: bold; color: #1E406E; white-space: nowrap; }
+
+  /* Footer */
+  .footer { text-align: center; color: #999; font-size: 12px; font-style: italic; margin-top: 60px; padding-top: 20px; border-top: 1px solid #ddd; }
+
+  /* Print */
+  @media print {
+    body { background: #fff; }
+    .page { box-shadow: none; margin: 0; padding: 40px 50px; }
+    h2 { page-break-before: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="uni">Τμήμα Μηχανικής Ηλεκτρονικών Υπολογιστών, Τηλεπικοινωνιών και Πληροφορικής</div>
+    <div class="uni">Πανεπιστήμιο Τεχνολογίας Κύπρου (CUT)</div>
+    <div class="label">Πρόταση Πτυχιακής Εργασίας</div>
+    <h1>DevSecOps Pipeline με ML-based Malware Detection<br>για Container Environments</h1>
+    <div class="meta">
+      Φοιτητής: &nbsp;<strong>Marios Mesaritis</strong><br>
+      Επιβλέπων Καθηγητής: &nbsp;<strong>Dr. Michael Sirivianos</strong><br>
+      Απρίλιος 2026
+    </div>
+  </div>
+
+  <!-- 1. ΓΕΝΙΚΟΣ ΣΚΟΠΟΣ -->
+  <h2>1. Γενικός Σκοπός της Πτυχιακής</h2>
+  <p>Σκοπός της παρούσας πτυχιακής εργασίας είναι η ανάπτυξη ενός ολοκληρωμένου συστήματος ασφάλειας λογισμικού, το οποίο ενσωματώνεται αυτόματα στη διαδικασία ανάπτυξης κώδικα (CI/CD pipeline) και εντοπίζει κακόβουλο λογισμικό, ευπάθειες και εσφαλμένες ρυθμίσεις ασφαλείας σε container environments — <strong>πριν ο κώδικας φτάσει σε production περιβάλλον.</strong></p>
+  <p>Το σύστημα συνδυάζει τεχνολογίες Distributed Systems, Machine Learning και Cloud Security για να παρέχει αυτοματοποιημένη, scalable και αξιόπιστη ανάλυση ασφαλείας. Κάθε βήμα καταγράφεται σε αμετάβλητο audit log για forensic χρήση.</p>
+
+  <div class="quote">"Πώς μπορούμε να εντοπίσουμε αυτόματα κακόβουλο κώδικα και ευπάθειες σε container environments, χρησιμοποιώντας ML και distributed processing, πριν αυτά φτάσουν σε χρήστες;"</div>
+
+  <h3>Σύνδεση με Μαθήματα Σπουδών</h3>
+  <ul>
+    <li><strong>Parallel &amp; Distributed Systems</strong> — Redis task queue, παράλληλη εκτέλεση modules σε containers</li>
+    <li><strong>ML Systems at Scale</strong> — Εκπαίδευση και inference ML model σε μεγάλο dataset (EMBER ~1M samples)</li>
+    <li><strong>Cloud Security</strong> — Container scanning, Kubernetes security, cloud misconfiguration detection</li>
+    <li><strong>Digital Forensics</strong> — Immutable audit log κάθε ανάλυσης με timestamps και hashes</li>
+  </ul>
+
+  <!-- 2. ΑΡΧΙΤΕΚΤΟΝΙΚΗ -->
+  <h2>2. Αρχιτεκτονική Συστήματος</h2>
+  <p>Το σύστημα αποτελείται από πέντε βασικά επίπεδα που επικοινωνούν μέσω REST API και message queue:</p>
+
+<pre>Developer pushes code to GitHub
+          |
+          v
+  [CI/CD Pipeline - GitHub Actions]
+          |
+          v
++-------------------------------------------+
+|         SECURITY GATE (core)              |
+|                                           |
+|  [Module 1]   [Module 2]   [Module 3]    |
+|  Container    ML Malware   Cloud Config  |
+|  Scanner      Analyzer     Checker       |
+|  (Trivy)      (PyTorch)    (k8s checks)  |
+|      \             |           /         |
+|       [Redis Queue - Parallel Jobs]      |
++-------------------------------------------+
+          |
+    PASS  |  FAIL
+     /         \
+    v            v
+[Deploy to    [Block + Alert]
+ Kubernetes]  [PostgreSQL Log]
+              [React Dashboard]</pre>
+
+  <h3>Module 1 — Container Vulnerability Scanner</h3>
+  <p>Χρησιμοποιεί το <strong>Trivy</strong> (open source tool της Aqua Security) για να σκανάρει κάθε Docker image layer-by-layer. Ελέγχει για:</p>
+  <ul>
+    <li>Γνωστές CVEs στα installed packages και dependencies</li>
+    <li>Exposed secrets — API keys, passwords, tokens μέσα στον κώδικα</li>
+    <li>Outdated base images με γνωστές ευπάθειες</li>
+    <li>Misconfigured file permissions και overprivileged processes</li>
+  </ul>
+<pre># Παράδειγμα Trivy output:
+Flask 2.0.1  ->  CVE-2023-XXXX  ->  HIGH     -> update to 2.3.0
+OpenSSL 1.1  ->  CVE-2022-XXXX  ->  CRITICAL -> update to 3.0
+SECRET FOUND ->  AWS_KEY in /app/config.py line 42</pre>
+
+  <h3>Module 2 — ML Malware Analyzer</h3>
+  <p>Εκπαιδευμένο ML model που αναλύει στατικά τα εκτελέσιμα αρχεία μέσα στο container χωρίς να τα εκτελεί (<strong>static analysis</strong>). Χρησιμοποιεί το <strong>EMBER dataset</strong> (~1M Windows PE samples) για εκπαίδευση.</p>
+  <ul>
+    <li><strong>File Entropy</strong> — υψηλό entropy = packed/encrypted = ύποπτο</li>
+    <li><strong>API Call Sequences</strong> — CryptEncrypt, DeleteShadowCopies κλπ</li>
+    <li><strong>Import Table</strong> — ποιες system libraries φορτώνει</li>
+    <li><strong>Suspicious Strings</strong> — URLs, IPs, commands μέσα στο binary</li>
+    <li><strong>C2 Patterns</strong> — επικοινωνία με command &amp; control server</li>
+  </ul>
+<pre># ML Model Output:
+{
+  "verdict":    "malware",
+  "confidence": 0.94,
+  "type":       "ransomware",
+  "reasons":    ["high entropy", "shadow copy deletion API",
+                 "known C2 server pattern"]
+}</pre>
+
+  <h3>Module 3 — Cloud Misconfiguration Checker</h3>
+  <p>Ελέγχει τα Kubernetes manifests και cloud configurations για λανθασμένες ρυθμίσεις:</p>
+  <ul>
+    <li>Containers που τρέχουν ως root χωρίς λόγο</li>
+    <li>Missing network policies — ports ανοιχτά χωρίς λόγο</li>
+    <li>Overprivileged RBAC roles</li>
+    <li>Missing resource limits (CPU/memory)</li>
+  </ul>
+
+  <h3>Redis Queue — Parallel Execution</h3>
+  <p>Και τα τρία modules τρέχουν <strong>ταυτόχρονα</strong> μέσω Celery + Redis task queue. Αντί sequentially (3x χρόνος), τρέχουν παράλληλα — εφαρμογή γνώσης από Parallel &amp; Distributed Systems.</p>
+
+  <!-- 3. TECH STACK -->
+  <h2>3. Tech Stack &amp; Frameworks</h2>
+  <table>
+    <thead><tr><th>Layer</th><th>Technology</th><th>Γιατί</th></tr></thead>
+    <tbody>
+      <tr><td>CI/CD</td><td>GitHub Actions</td><td>Industry standard, δωρεάν για public repos</td></tr>
+      <tr><td>Containers</td><td>Docker</td><td>Isolation κάθε module, reproducible builds</td></tr>
+      <tr><td>Orchestration</td><td>Kubernetes (minikube)</td><td>Distributed deployment, τοπικά χωρίς κόστος</td></tr>
+      <tr><td>Container Scan</td><td>Trivy (Aqua Security)</td><td>Open source, production-ready CVE scanner</td></tr>
+      <tr><td>ML Framework</td><td>Python + PyTorch</td><td>Malware classification, EMBER dataset</td></tr>
+      <tr><td>ML Dataset</td><td>EMBER / MalwareBazaar</td><td>Δημόσιο, ~1M samples, standard benchmark</td></tr>
+      <tr><td>Task Queue</td><td>Redis + Celery</td><td>Parallel execution των 3 modules</td></tr>
+      <tr><td>Backend API</td><td>FastAPI (Python)</td><td>Async, γρήγορο, auto documentation</td></tr>
+      <tr><td>Frontend</td><td>React + TailwindCSS</td><td>Dashboard, charts, real-time alerts</td></tr>
+      <tr><td>Database</td><td>PostgreSQL</td><td>Αποτελέσματα scans, audit log</td></tr>
+      <tr><td>Static Analysis</td><td>YARA Rules</td><td>Pattern matching για malware signatures</td></tr>
+      <tr><td>Audit Log</td><td>Immutable DB table</td><td>Forensic evidence, tamper-proof</td></tr>
+    </tbody>
+  </table>
+
+  <!-- 4. AXIOS INCIDENT -->
+  <h2>4. Πραγματικό Περιστατικό: Axios Supply Chain Attack (Μάρτιος 2026)</h2>
+
+  <div class="alert">
+    <strong>⚠ ΠΡΑΓΜΑΤΙΚΟ ΠΕΡΙΣΤΑΤΙΚΟ — Μάρτιος 2026</strong><br>
+    Βορειοκορεάτες hackers (UNC1069) παραβίασαν το npm package Axios με 83 εκατομμύρια εβδομαδιαία downloads.
+  </div>
+
+  <p>Τον Μάρτιο του 2026, η ομάδα UNC1069 παραβίασε τον npm λογαριασμό του κύριου συντηρητή του Axios και ανέβασε δύο μολυσμένες εκδόσεις (1.14.1 και 0.30.4) που περιείχαν RAT (Remote Access Trojan) ως κρυφό dependency.</p>
+
+  <h3>Πώς έγινε — Supply Chain Attack</h3>
+  <ol>
+    <li>Hack του npm account του developer "jasonsaayman"</li>
+    <li>Upload μολυσμένων versions με fake dependency "plain-crypto-js v4.2.1"</li>
+    <li>Το dependency εγκαθιστούσε RAT που επικοινωνούσε με C2 server</li>
+    <li>Διέγραφε τα ίχνη του για να αποφύγει detection</li>
+    <li>83 εκατομμύρια developers το κατέβασαν χωρίς να το ξέρουν</li>
+  </ol>
+
+  <h3>Πώς το σύστημα της πτυχιακής θα το απέτρεπε</h3>
+  <ul>
+    <li><strong>Module 1 (Trivy):</strong> Θα εντόπιζε το "plain-crypto-js v4.2.1" ως unverified/malicious dependency.</li>
+    <li><strong>Module 2 (ML Model):</strong> Το postinstall script θα είχε C2 patterns και obfuscated code που ενεργοποιούν το model.</li>
+    <li><strong>CI/CD Pipeline:</strong> Το deployment θα μπλοκαριζόταν αυτόματα πριν φτάσει στους developers.</li>
+    <li><strong>Audit Log:</strong> Timestamp, hash και λόγος rejection θα αποθηκεύονταν ως αμετάβλητη forensic απόδειξη.</li>
+  </ul>
+
+<pre># Τι θα έβλεπε ο investigator στο Dashboard:
+SCAN FAILED - axios v1.14.1
+  [CRITICAL] Malicious dependency: plain-crypto-js@4.2.1
+             ML Confidence: 96%  |  Type: RAT Dropper
+             Reason: C2 pattern, obfuscated postinstall
+  [HIGH]     Suspicious postinstall script with network calls
+  DEPLOYMENT BLOCKED
+  Audit: 2026-03-31T02:14:33Z | hash: a3f9... | blocked by: ML+Trivy</pre>
+
+  <div class="quote">Το περιστατικό του Axios αποδεικνύει ότι ακόμα και οι πιο trusted libraries μπορούν να παραβιαστούν. Η πτυχιακή αυτή λύνει ακριβώς αυτό το πρόβλημα.</div>
+
+  <!-- 5. ML DETAILS -->
+  <h2>5. ML Model — Σημαντικές Λεπτομέρειες</h2>
+  <p><strong>Dataset: EMBER (Endgame Malware BEnchmark for Research)</strong></p>
+  <ul>
+    <li>~1 εκατομμύριο Windows PE (Portable Executable) samples</li>
+    <li>Labels: benign / malware (balanced dataset)</li>
+    <li>Δημόσιο, standard benchmark — χρησιμοποιείται σε academic papers</li>
+    <li>Επιπλέον samples από MalwareBazaar για πρόσφατα δείγματα</li>
+  </ul>
+
+  <table>
+    <thead><tr><th>Feature</th><th>Τι δείχνει</th></tr></thead>
+    <tbody>
+      <tr><td>File Entropy</td><td>Υψηλό entropy = packed/encrypted code = ύποπτο</td></tr>
+      <tr><td>Import Table</td><td>Windows APIs που φορτώνει (CreateRemoteThread, CryptEncrypt κλπ)</td></tr>
+      <tr><td>API Call Sequences</td><td>Σειρά API calls χαρακτηριστική ransomware/trojan</td></tr>
+      <tr><td>Strings</td><td>URLs, IPs, registry paths, commands μέσα στο binary</td></tr>
+      <tr><td>Section Headers</td><td>Ασυνήθιστα PE sections ή λάθος permissions</td></tr>
+      <tr><td>File Size / Type</td><td>Anomalies σε size ή mismatch extension vs πραγματικός τύπος</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Model Architecture:</strong></p>
+  <ul>
+    <li>Baseline: LightGBM / Random Forest (γρήγορο, ερμηνεύσιμο)</li>
+    <li>Advanced: Neural Network με embedding layers για API sequences</li>
+    <li>Output: verdict + confidence score + top reasons (explainability)</li>
+  </ul>
+  <p><em>Σημαντικό: Το model κάνει static analysis — δεν εκτελεί ποτέ το ύποπτο αρχείο. Αυτό το κάνει ασφαλές και γρήγορο για χρήση σε CI/CD pipeline.</em></p>
+
+  <!-- 6. CI/CD -->
+  <h2>6. CI/CD Pipeline &amp; Kubernetes</h2>
+  <h3>Τι είναι το CI/CD Pipeline</h3>
+  <p>CI/CD (Continuous Integration / Continuous Deployment) είναι ένα αυτοματοποιημένο σύστημα που εκτελείται κάθε φορά που ο developer κάνει push κώδικα στο GitHub. Αντικαθιστά τα χειροκίνητα βήματα (tests, builds, deployments) με αυτόματες διεργασίες.</p>
+<pre>Developer: git push
+     |
+     v   GitHub Actions ενεργοποιείται αυτόματα
+     |
+  Step 1: Build Docker Image
+  Step 2: Run Security Gate (το project μας)  &lt;-- εδώ μπαίνει η πτυχιακή
+  Step 3: Run Unit Tests
+  Step 4: Deploy to Kubernetes (μόνο αν PASS)
+  Step 5: Notify team</pre>
+
+  <h3>Τι είναι το Kubernetes</h3>
+  <p>Σύστημα orchestration containers. Διαχειρίζεται αυτόματα ποια containers τρέχουν, πόσα instances χρειάζονται και τι γίνεται αν κάτι σπάσει. Για την πτυχιακή χρησιμοποιείται <strong>minikube</strong> — τοπικό Kubernetes cluster χωρίς κόστος cloud.</p>
+
+  <!-- 7. TIMELINE -->
+  <h2>7. Πλάνο Υλοποίησης (6 Μήνες)</h2>
+  <table class="phase-table">
+    <thead><tr><th>Φάση</th><th>Διάρκεια</th><th>Παραδοτέο</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Φάση 1</strong><br>CI/CD + Container Scanner</td>
+        <td>3 μήνες</td>
+        <td>GitHub Actions pipeline + Trivy integration + basic dashboard</td>
+      </tr>
+      <tr>
+        <td><strong>Φάση 2</strong><br>ML Model</td>
+        <td>3 μήνες</td>
+        <td>Εκπαίδευση σε EMBER dataset, integration στο pipeline, explainability</td>
+      </tr>
+      <tr>
+        <td><strong>Φάση 3</strong><br>Kubernetes + Cloud Checks</td>
+        <td>2 μήνες</td>
+        <td>Kubernetes security checks, minikube deployment, parallel execution</td>
+      </tr>
+      <tr>
+        <td><strong>Φάση 4</strong><br>Dashboard + Evaluation</td>
+        <td>2 μήνες</td>
+        <td>React dashboard, audit log, τεστ με malware samples, γράψιμο κειμένου</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 8. ΓΙΑΤΙ ΣΗΜΕΡΑ -->
+  <h2>8. Γιατί Είναι Σημαντικό Σήμερα</h2>
+  <ul>
+    <li><strong>Axios npm attack (Μάρτιος 2026):</strong> Supply chain attack από Βορειοκορεάτες hackers σε library με 83M weekly downloads — ακριβώς το πρόβλημα που λύνει αυτή η πτυχιακή.</li>
+    <li><strong>XZ Utils backdoor (2024):</strong> 2 χρόνια undercover operation για εισαγωγή backdoor σε core Linux library.</li>
+    <li><strong>Log4Shell (2021):</strong> CVE-2021-44228 επηρέασε εκατομμύρια servers παγκοσμίως — automated scanner θα το εντόπιζε πριν deploy.</li>
+    <li><strong>Αγορά εργασίας:</strong> Εταιρείες όπως Snyk ($8.5B), Aqua Security, Prisma Cloud κάνουν ακριβώς αυτό — το DevSecOps skill είναι από τα πιο ζητούμενα το 2026.</li>
+  </ul>
+
+  <!-- 9. GLOSSARY -->
+  <h2>9. Βασικές Έννοιες — Quick Reference</h2>
+  <table class="concept">
+    <thead><tr><th>Όρος</th><th>Εξήγηση</th></tr></thead>
+    <tbody>
+      <tr><td>CVE</td><td>Common Vulnerabilities and Exposures — μοναδικός κωδικός για κάθε γνωστή ευπάθεια (π.χ. CVE-2021-44228 = Log4Shell)</td></tr>
+      <tr><td>Supply Chain Attack</td><td>Επίθεση στις dependencies/libraries αντί στον ίδιο τον κώδικα</td></tr>
+      <tr><td>Static Analysis</td><td>Ανάλυση αρχείου χωρίς να το εκτελέσεις — ασφαλής μέθοδος malware analysis</td></tr>
+      <tr><td>RAT</td><td>Remote Access Trojan — malware που δίνει πλήρη πρόσβαση στον attacker</td></tr>
+      <tr><td>EMBER Dataset</td><td>Δημόσιο dataset ~1M malware samples για εκπαίδευση ML models</td></tr>
+      <tr><td>YARA Rules</td><td>Pattern matching language για εντοπισμό malware signatures</td></tr>
+      <tr><td>Audit Log</td><td>Αμετάβλητο αρχείο καταγραφής — timestamp, hash, αποτέλεσμα κάθε ανάλυσης</td></tr>
+      <tr><td>Trivy</td><td>Open source container scanner της Aqua Security για CVEs και secrets</td></tr>
+      <tr><td>Celery + Redis</td><td>Python task queue για παράλληλη εκτέλεση εργασιών</td></tr>
+      <tr><td>minikube</td><td>Τοπικό Kubernetes cluster για development χωρίς κόστος cloud</td></tr>
+      <tr><td>DevSecOps</td><td>Development + Security + Operations — ασφάλεια ενσωματωμένη στο development pipeline</td></tr>
+      <tr><td>C2 Server</td><td>Command &amp; Control server — ο server που ελέγχει το malware εξ αποστάσεως</td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer">
+    Έγγραφο προετοιμασμένο για παρουσίαση στον Dr. Michael Sirivianos — CUT, Απρίλιος 2026
+  </div>
+
+</div>
+</body>
+</html>
